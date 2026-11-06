@@ -2,7 +2,8 @@
 
 B models and the C code generated from them, for 18 small programs. They come from PipelineB, a chain
 that goes from an informal specification to C with the B method: Claude Opus 5.5 writes the machines
-and the refinement rules, BART refines, Atelier B proves, C4B generates the code.
+and the refinement rules, ProB checks the model against its properties and scenarios (animation, model
+checking, LTL), BART refines, Atelier B proves, C4B generates the code.
 
 **The C code is not proved.** Proof covers the B models down to the implementations. The C comes from
 C4B and has not been verified: this is the gap that a check such as B2ACSL and Frama-C WP could address.
@@ -46,7 +47,7 @@ of the machine that validates the rule; those machines are not in this repositor
 
 ## Tools
 
-Atelier B Community Edition 24.04.2, with BART and C4B.
+Atelier B Community Edition 24.04.2, with BART and C4B; ProB 1.16.0 (nightly of 2026-04-14).
 
 ## License
 
