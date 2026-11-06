@@ -1,0 +1,59 @@
+/* RemoveArray_r: intermediate level of RemoveArray, written by hand (PipelineB, refinement step), the
+   component BART refines.
+   Purpose: state every count in one form, the fixed set of kept positions cut by a growing interval:
+   card(S /\ (0..xx - 1)), with S = {ii | ii : 0..max_IDX & array(ii) /= value}. This is the form a
+   counting loop keeps, the one the proof lines of card_ar and compte_ar close, whereas a comprehension
+   whose domain depends on the position does not reach them. The proof that the two forms agree,
+   {jj | jj : 0..xx - 1 & array(jj) /= value} = S /\ (0..xx - 1) for xx : 0..max_IDX, is thus done once,
+   here, away from the loop.
+   Nothing else changes: rr still ranges over ran(array), which the loop keeps cell by cell, and the
+   couple form of the moved cell stays, so it needs no proof that the position is in the domain of rr.
+   S is written with the bound name ii everywhere, as in RemoveArray, and the two quantifiers over
+   positions use xx: the rule has one joker for each.
+   array stays the concrete variable of RemoveArray; set_cell and the initialisation are unchanged.
+   Same shape as SelectionSort_r and ReverseArray_r, the levels with an inherited concrete variable
+   BART has refined: an INVARIANT clause restating the type of array, and an ANY, taken by a structure
+   rule. */
+REFINEMENT
+    RemoveArray_r
+
+REFINES
+    RemoveArray
+
+SEES
+    Ctx_RemoveArray
+
+INVARIANT
+    array : (0..max_IDX) --> INT
+
+INITIALISATION
+    array := (0..max_IDX) * {0}
+
+OPERATIONS
+
+    set_cell(pos, val) =
+    PRE
+        pos : IDX &
+        val : INT
+    THEN
+        array(pos) := val
+    END;
+
+    kept <-- remove(value) =
+    PRE
+        value : INT
+    THEN
+        ANY rr, nb WHERE
+            rr : (0..max_IDX) --> ran(array) &
+            nb : NAT &
+            nb = card({ii | ii : 0..max_IDX & array(ii) /= value}) &
+            !xx.(xx : 0..max_IDX & array(xx) /= value =>
+                 (card({ii | ii : 0..max_IDX & array(ii) /= value} /\ (0..xx - 1)) |-> array(xx)) : rr) &
+            !xx.(xx : nb..max_IDX => rr(xx) = array(xx))
+        THEN
+            array := rr ||
+            kept := nb
+        END
+    END
+
+END

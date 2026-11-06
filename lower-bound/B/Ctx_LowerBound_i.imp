@@ -1,0 +1,12 @@
+/* Implementation of the context of LowerBound, written by hand. */
+IMPLEMENTATION
+    Ctx_LowerBound_i
+
+REFINES
+    Ctx_LowerBound
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

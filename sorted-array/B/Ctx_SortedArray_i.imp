@@ -1,0 +1,12 @@
+/* Implementation of the context of SortedArray, written by hand. */
+IMPLEMENTATION
+    Ctx_SortedArray_i
+
+REFINES
+    Ctx_SortedArray
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

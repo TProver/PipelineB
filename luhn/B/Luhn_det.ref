@@ -1,0 +1,80 @@
+/* Luhn_det: second intermediate level of Luhn, written by hand (PipelineB, refinement step),
+   the component BART refines.
+   Purpose: make verify and control_digit deterministic and B0-shaped, with no quantifier:
+   - "sum_now is a multiple of 10" becomes sum_now mod 10 = 0 (sum_now is in NAT);
+   - the check digit is (10 - sum_next mod 10) mod 10, the only digit ch with
+     ch + sum_next a multiple of 10.
+   Only arithmetic is left to prove at this level; the data are those of Luhn_sum. The typing
+   and bounds of num and of the sums are restated so that BART finds the forms its rules
+   expect (pile_ar for num, scalar_fast for the sums). */
+REFINEMENT
+    Luhn_det
+
+REFINES
+    Luhn_sum
+
+SEES
+    Ctx_Luhn
+
+VARIABLES
+    num, sum_now, sum_next
+
+INVARIANT
+    num : seq(DIGIT) &
+    size(num) <= max_IDX + 1 &
+    sum_now : NAT &
+    sum_next : NAT &
+    sum_now <= 9 * size(num) &
+    sum_next <= 9 * size(num)
+
+INITIALISATION
+    num := [] ||
+    sum_now := 0 ||
+    sum_next := 0
+
+OPERATIONS
+
+    clear_number =
+    BEGIN
+        num := [] ||
+        sum_now := 0 ||
+        sum_next := 0
+    END;
+
+    add_digit(dd) =
+    PRE
+        dd : DIGIT &
+        size(num) <= max_IDX
+    THEN
+        num := num <- dd ||
+        sum_now := dd + sum_next ||
+        sum_next := dd + (dd - 9 * (dd / 5)) + sum_now
+    END;
+
+    rr <-- verify =
+    BEGIN
+        rr := bool(2 <= size(num) & sum_now mod 10 = 0)
+    END;
+
+    cc <-- control_digit =
+    PRE
+        size(num) >= 1 &
+        size(num) <= max_IDX
+    THEN
+        cc := (10 - sum_next mod 10) mod 10
+    END;
+
+    ll <-- number_length =
+    BEGIN
+        ll := size(num)
+    END;
+
+    dd <-- digit_at(pp) =
+    PRE
+        pp : NAT &
+        pp : 1..size(num)
+    THEN
+        dd := num(pp)
+    END
+
+END

@@ -1,0 +1,32 @@
+/* LowerBound_r: intermediate level of LowerBound, written by hand (PipelineB, refinement step), the
+   component BART refines.
+   Purpose: replace min({kk | ...} \/ {max_IDX + 1}) by the three facts a loop establishes: the
+   result is a position or max_IDX + 1, every position before it is below value, and it is at least
+   value if it is a position. The proof that these facts define the minimum is thus done once, here,
+   away from the loop, and needs no order on the array. Same shape as FindArray_r of the find-array
+   demonstration.
+   The precondition is repeated in full: the order on the array is what the binary search of the
+   next step relies on, and only there. */
+REFINEMENT
+    LowerBound_r
+
+REFINES
+    LowerBound
+
+SEES
+    Ctx_LowerBound
+
+OPERATIONS
+
+    pos <-- lower_bound(array, value) =
+    PRE
+        array : (0..max_IDX) --> INT &
+        value : INT &
+        !(ii, jj).(ii : 0..max_IDX & jj : 0..max_IDX & ii <= jj => array(ii) <= array(jj))
+    THEN
+        pos :( pos : 0..max_IDX + 1 &
+               !ii.(ii : 0..pos - 1 => array(ii) < value) &
+               (pos <= max_IDX => value <= array(pos)) )
+    END
+
+END

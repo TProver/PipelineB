@@ -1,0 +1,13 @@
+/* Head implementation of the heap sort demonstration, written by hand: imports the context and
+   the HeapSort component. */
+IMPLEMENTATION
+    Systeme_HeapSort_i
+
+REFINES
+    Systeme_HeapSort
+
+IMPORTS
+    Ctx_HeapSort,
+    HeapSort
+
+END

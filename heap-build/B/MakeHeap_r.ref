@@ -1,0 +1,49 @@
+/* MakeHeap_r: intermediate level of MakeHeap, written by hand (PipelineB, refinement step), the
+   component BART refines.
+   Purpose: restate the result of make_heap in the form the loops establish, so that two arguments
+   are made once, here, away from the loops:
+   - the heap is stated from the parent, cell 2 * xx + 1 and cell 2 * xx + 2 at most cell xx, with no
+     division: the kernel knows little of a / b, and the loops only need linear facts. That this form
+     implies the one of MakeHeap, on (ii - 1) / 2, is proved on the positions 1..max_IDX;
+   - the permutation is written cell by cell, rr(xx) = array(bij(xx)), and the composition
+     (bij ; array) and the range ran(array) of MakeHeap follow from it.
+   array stays the concrete variable of MakeHeap; set_cell and the initialisation are unchanged.
+   As in InsertionSort_r: an INVARIANT clause restating the type of array, and an ANY, taken by a
+   structure rule. The quantifiers of make_heap all use the name xx: the rule has one joker for it. */
+REFINEMENT
+    MakeHeap_r
+
+REFINES
+    MakeHeap
+
+SEES
+    Ctx_MakeHeap
+
+INVARIANT
+    array : (0..max_IDX) --> INT
+
+INITIALISATION
+    array := (0..max_IDX) * {0}
+
+OPERATIONS
+
+    set_cell(pos, value) =
+    PRE
+        pos : IDX &
+        value : INT
+    THEN
+        array(pos) := value
+    END;
+
+    make_heap =
+    ANY rr WHERE
+        rr : (0..max_IDX) --> INT &
+        !xx.(xx : 0..max_IDX & 2 * xx + 1 <= max_IDX => rr(2 * xx + 1) <= rr(xx)) &
+        !xx.(xx : 0..max_IDX & 2 * xx + 2 <= max_IDX => rr(2 * xx + 2) <= rr(xx)) &
+        #bij.(bij : (0..max_IDX) >->> (0..max_IDX) &
+              !xx.(xx : 0..max_IDX => rr(xx) = array(bij(xx))))
+    THEN
+        array := rr
+    END
+
+END

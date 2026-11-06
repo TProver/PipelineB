@@ -1,0 +1,12 @@
+/* Implementation of the context of HeapSort, written by hand. */
+IMPLEMENTATION
+    Ctx_HeapSort_i
+
+REFINES
+    Ctx_HeapSort
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

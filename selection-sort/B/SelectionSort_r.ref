@@ -1,0 +1,46 @@
+/* SelectionSort_r: intermediate level of SelectionSort, written by hand (PipelineB, refinement step),
+   the component BART refines.
+   Purpose: restate the result of sort in the form the loop establishes, the permutation written
+   cell by cell, rr(xx) = array(bij(xx)). The proof that this form implies the one of SelectionSort
+   (composition (bij ; array), range ran(array)) is thus done once, here, away from the loop.
+   array stays the concrete variable of SelectionSort; set_cell and the initialisation are unchanged.
+   Same shape as ReverseArray_r and FillArray_r, the levels with an inherited concrete variable BART
+   has refined: an INVARIANT clause restating the type of array, and an ANY, taken by a structure
+   rule. The two quantifiers of sort over positions use the same name, xx: the rule has one joker
+   for it. */
+REFINEMENT
+    SelectionSort_r
+
+REFINES
+    SelectionSort
+
+SEES
+    Ctx_SelectionSort
+
+INVARIANT
+    array : (0..max_IDX) --> INT
+
+INITIALISATION
+    array := (0..max_IDX) * {0}
+
+OPERATIONS
+
+    set_cell(pos, value) =
+    PRE
+        pos : IDX &
+        value : INT
+    THEN
+        array(pos) := value
+    END;
+
+    sort =
+    ANY rr WHERE
+        rr : (0..max_IDX) --> INT &
+        !xx.(xx : 0..max_IDX - 1 => rr(xx) <= rr(xx + 1)) &
+        #bij.(bij : (0..max_IDX) >->> (0..max_IDX) &
+              !xx.(xx : 0..max_IDX => rr(xx) = array(bij(xx))))
+    THEN
+        array := rr
+    END
+
+END

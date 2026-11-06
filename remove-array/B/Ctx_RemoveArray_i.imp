@@ -1,0 +1,12 @@
+/* Implementation of the context of RemoveArray, written by hand. */
+IMPLEMENTATION
+    Ctx_RemoveArray_i
+
+REFINES
+    Ctx_RemoveArray
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

@@ -1,0 +1,13 @@
+/* Head implementation of the heap demonstration, written by hand: imports the context and the
+   MakeHeap component. */
+IMPLEMENTATION
+    Systeme_MakeHeap_i
+
+REFINES
+    Systeme_MakeHeap
+
+IMPORTS
+    Ctx_MakeHeap,
+    MakeHeap
+
+END

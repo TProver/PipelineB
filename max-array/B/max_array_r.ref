@@ -1,0 +1,26 @@
+/* max_array_r: intermediate level of max_array, written by hand (PipelineB, refinement step), the
+   component BART refines.
+   Purpose: replace max(ran(array)) by the two facts a loop establishes: the result is a value of
+   the array, and no position holds a greater value. The proof that these two facts define
+   max(ran(array)) is thus done once, here, away from the loop. Same level as max_array_r of the
+   B Workbook, with 0..NN written in place of dom(array). */
+REFINEMENT
+    max_array_r
+
+REFINES
+    max_array
+
+SEES
+    ctx
+
+OPERATIONS
+
+    maxi <-- getMaximum(array) =
+    PRE
+        array : (0..NN) --> INT
+    THEN
+        maxi :( maxi : ran(array) &
+                !index.(index : 0..NN => array(index) <= maxi) )
+    END
+
+END

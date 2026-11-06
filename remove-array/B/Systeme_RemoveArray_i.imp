@@ -1,0 +1,12 @@
+/* Implementation of the head of RemoveArray, written by hand. */
+IMPLEMENTATION
+    Systeme_RemoveArray_i
+
+REFINES
+    Systeme_RemoveArray
+
+IMPORTS
+    Ctx_RemoveArray,
+    RemoveArray
+
+END

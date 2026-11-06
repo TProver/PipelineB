@@ -1,0 +1,13 @@
+/* Head implementation of the count-array demonstration, written by hand: imports the context
+   and the CountArray component. */
+IMPLEMENTATION
+    Systeme_CountArray_i
+
+REFINES
+    Systeme_CountArray
+
+IMPORTS
+    Ctx_CountArray,
+    CountArray
+
+END

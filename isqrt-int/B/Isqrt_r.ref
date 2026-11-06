@@ -1,0 +1,31 @@
+/* Isqrt_r: second intermediate level of Isqrt, written by hand (PipelineB, refinement step), the
+   component BART refines.
+   Purpose: replace the universal fact of Isqrt_ord by the fact a binary search establishes at its
+   exit, on the two neighbours res and res + 1: the square of res is at most nn, the square of res + 1
+   is greater than nn.
+   The one argument that is not linear, the monotony of squares on naturals, is made here, away from
+   the loop: if res + 1 <= rr then (res + 1) * (res + 1) <= rr * rr, so rr * rr <= nn gives rr <= res.
+   It is the only obligation of this level with content. The loop of the next step then never compares
+   two squares: it only reads the result of one product.
+   No variable: nothing is inherited. */
+REFINEMENT
+    Isqrt_r
+
+REFINES
+    Isqrt_ord
+
+SEES
+    Ctx_Isqrt
+
+OPERATIONS
+
+    res <-- isqrt(nn) =
+    PRE
+        nn : VAL
+    THEN
+        res :( res : 0..max_ROOT &
+               res * res <= nn &
+               nn < (res + 1) * (res + 1) )
+    END
+
+END

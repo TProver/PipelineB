@@ -1,0 +1,12 @@
+/* Implementation of the context of MakeHeap, written by hand. */
+IMPLEMENTATION
+    Ctx_MakeHeap_i
+
+REFINES
+    Ctx_MakeHeap
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

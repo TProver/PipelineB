@@ -1,0 +1,37 @@
+/* FillArray_r: intermediate level of FillArray, written by hand (PipelineB, refinement step), the
+   component BART refines.
+   Purpose: replace the lambda of set_array_value by the facts a loop establishes: the new array is a
+   total function, and each position holds its own number. The proof that these facts define the
+   lambda (equality of two functions) is thus done once, here, away from the loop.
+   array stays the concrete variable of FillArray, and its initialisation is unchanged.
+   Two choices follow Quicksort_r, the only level with an inherited concrete variable BART has
+   refined:
+   - an INVARIANT clause, restating the type of array. Without it, BART stopped silently on this
+     level, twice;
+   - an ANY, taken by a structure rule, in place of array :( ... ) on the variable itself. */
+REFINEMENT
+    FillArray_r
+
+REFINES
+    FillArray
+
+SEES
+    Ctx_FillArray
+
+INVARIANT
+    array : (0..max_IDX) --> INT
+
+INITIALISATION
+    array := (0..max_IDX) * {0}
+
+OPERATIONS
+
+    set_array_value =
+    ANY rr WHERE
+        rr : (0..max_IDX) --> INT &
+        !ii.(ii : 0..max_IDX => rr(ii) = ii)
+    THEN
+        array := rr
+    END
+
+END

@@ -1,0 +1,12 @@
+/* Implementation of the head of FindArray, written by hand. */
+IMPLEMENTATION
+    Systeme_FindArray_i
+
+REFINES
+    Systeme_FindArray
+
+IMPORTS
+    Ctx_FindArray,
+    FindArray
+
+END

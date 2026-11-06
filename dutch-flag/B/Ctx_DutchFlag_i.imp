@@ -1,0 +1,14 @@
+/* Implementation of the DutchFlag context, written by hand: values of the constants. */
+IMPLEMENTATION
+    Ctx_DutchFlag_i
+
+REFINES
+    Ctx_DutchFlag
+
+VALUES
+    max_COLOUR = 2;
+    COLOUR = 0..max_COLOUR;
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

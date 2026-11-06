@@ -1,0 +1,19 @@
+/* Implementation of the Luhn context, written by hand: values of the constants of Ctx_Luhn. */
+IMPLEMENTATION
+    Ctx_Luhn_i
+
+REFINES
+    Ctx_Luhn
+
+VALUES
+    max_DIGIT = 9;
+    DIGIT = 0..max_DIGIT;
+    max_IDX = 18;
+    IDX = 0..max_IDX;
+    max_CHARCODE = 255;
+    CHARCODE = 0..max_CHARCODE;
+    CODE_ZERO = 48;
+    CODE_SPACE = 32;
+    CODE_DASH = 45
+
+END

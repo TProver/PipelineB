@@ -1,0 +1,13 @@
+/* Head implementation of the array partition demonstration, written by hand: imports the context
+   and the PartitionArray component. */
+IMPLEMENTATION
+    Systeme_PartitionArray_i
+
+REFINES
+    Systeme_PartitionArray
+
+IMPORTS
+    Ctx_PartitionArray,
+    PartitionArray
+
+END

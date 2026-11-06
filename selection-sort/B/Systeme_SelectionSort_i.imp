@@ -1,0 +1,13 @@
+/* Head implementation of the selection sort demonstration, written by hand: imports the context
+   and the SelectionSort component. */
+IMPLEMENTATION
+    Systeme_SelectionSort_i
+
+REFINES
+    Systeme_SelectionSort
+
+IMPORTS
+    Ctx_SelectionSort,
+    SelectionSort
+
+END

@@ -1,0 +1,15 @@
+/* Implementation of the Power context, written by hand: values of the constants. */
+IMPLEMENTATION
+    Ctx_Power_i
+
+REFINES
+    Ctx_Power
+
+VALUES
+    max_BASE = 10;
+    BASE = 0..max_BASE;
+    max_EXPO = 6;
+    EXPO = 0..max_EXPO;
+    max_RES = 1000000
+
+END

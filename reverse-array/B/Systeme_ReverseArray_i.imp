@@ -1,0 +1,12 @@
+/* Implementation of the head of ReverseArray, written by hand. */
+IMPLEMENTATION
+    Systeme_ReverseArray_i
+
+REFINES
+    Systeme_ReverseArray
+
+IMPORTS
+    Ctx_ReverseArray,
+    ReverseArray
+
+END

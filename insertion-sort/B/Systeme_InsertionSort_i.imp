@@ -1,0 +1,13 @@
+/* Head implementation of the insertion sort demonstration, written by hand: imports the context
+   and the InsertionSort component. */
+IMPLEMENTATION
+    Systeme_InsertionSort_i
+
+REFINES
+    Systeme_InsertionSort
+
+IMPORTS
+    Ctx_InsertionSort,
+    InsertionSort
+
+END

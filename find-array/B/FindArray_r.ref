@@ -1,0 +1,28 @@
+/* FindArray_r: intermediate level of FindArray, written by hand (PipelineB, refinement step), the
+   component BART refines.
+   Purpose: replace min({ii | ...} \/ {max_IDX + 1}) by the three facts a loop establishes: the
+   result is a position or max_IDX + 1, no position before it holds value, and it holds value if
+   it is a position. The proof that these facts define the minimum is thus done once, here, away
+   from the loop. Same shape as max_array_r of the max-array demonstration. */
+REFINEMENT
+    FindArray_r
+
+REFINES
+    FindArray
+
+SEES
+    Ctx_FindArray
+
+OPERATIONS
+
+    pos <-- find(array, value) =
+    PRE
+        array : (0..max_IDX) --> INT &
+        value : INT
+    THEN
+        pos :( pos : 0..max_IDX + 1 &
+               !ii.(ii : 0..pos - 1 => array(ii) /= value) &
+               (pos <= max_IDX => array(pos) = value) )
+    END
+
+END

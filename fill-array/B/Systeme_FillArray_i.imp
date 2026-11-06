@@ -1,0 +1,12 @@
+/* Implementation of the head of FillArray, written by hand. */
+IMPLEMENTATION
+    Systeme_FillArray_i
+
+REFINES
+    Systeme_FillArray
+
+IMPORTS
+    Ctx_FillArray,
+    FillArray
+
+END

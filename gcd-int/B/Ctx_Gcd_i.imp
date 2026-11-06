@@ -1,0 +1,12 @@
+/* Implementation of the Gcd context, written by hand: values of the constants. */
+IMPLEMENTATION
+    Ctx_Gcd_i
+
+REFINES
+    Ctx_Gcd
+
+VALUES
+    max_VAL = 10000;
+    VAL = 0..max_VAL
+
+END

@@ -1,0 +1,12 @@
+/* Implementation of the head of LowerBound, written by hand. */
+IMPLEMENTATION
+    Systeme_LowerBound_i
+
+REFINES
+    Systeme_LowerBound
+
+IMPORTS
+    Ctx_LowerBound,
+    LowerBound
+
+END

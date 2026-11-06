@@ -1,0 +1,12 @@
+/* Implementation of the head, written by hand. */
+IMPLEMENTATION
+    Systeme_Gcd_i
+
+REFINES
+    Systeme_Gcd
+
+IMPORTS
+    Ctx_Gcd,
+    Gcd
+
+END

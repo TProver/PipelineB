@@ -1,0 +1,12 @@
+/* Implementation of the CountArray context, written by hand: values of the constants. */
+IMPLEMENTATION
+    Ctx_CountArray_i
+
+REFINES
+    Ctx_CountArray
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

@@ -1,0 +1,13 @@
+/* Head implementation of the Dutch national flag demonstration, written by hand: imports the
+   context and the DutchFlag component. */
+IMPLEMENTATION
+    Systeme_DutchFlag_i
+
+REFINES
+    Systeme_DutchFlag
+
+IMPORTS
+    Ctx_DutchFlag,
+    DutchFlag
+
+END

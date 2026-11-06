@@ -1,0 +1,34 @@
+/* Gcd_r: intermediate level of Gcd, written by hand (PipelineB, refinement step), the component BART
+   refines.
+   Purpose: replace max({dd | ...}) by the facts Euclid's loop establishes: the result is a positive
+   common divisor of aa and bb, and every positive common divisor of aa and bb divides it.
+   The greatest of the common divisors is thus stated by divisibility, not by order. The one argument
+   about order, that a positive number is at least each of its divisors, is made here, away from the
+   loop: it gives res : 1..aa and dd <= res, so that res is the max of Gcd. The loop of the next step
+   then speaks of divisibility only.
+   Same purpose as max_array_r of the max-array demonstration. No variable: nothing is inherited. */
+REFINEMENT
+    Gcd_r
+
+REFINES
+    Gcd
+
+SEES
+    Ctx_Gcd
+
+OPERATIONS
+
+    res <-- gcd(aa, bb) =
+    PRE
+        aa : VAL &
+        bb : VAL &
+        1 <= aa &
+        1 <= bb
+    THEN
+        res :( res : NAT1 &
+               aa mod res = 0 &
+               bb mod res = 0 &
+               !dd.(dd : NAT1 & aa mod dd = 0 & bb mod dd = 0 => res mod dd = 0) )
+    END
+
+END

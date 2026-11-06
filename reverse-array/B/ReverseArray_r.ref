@@ -1,0 +1,35 @@
+/* ReverseArray_r: intermediate level of ReverseArray, written by hand (PipelineB, refinement step),
+   the component BART refines.
+   Purpose: replace the lambda of reverse by the facts a loop establishes: the new array is a total
+   function, and each position holds the value of its mirror position. The proof that these facts
+   define the lambda (equality of two functions) is thus done once, here, away from the loop.
+   array stays the concrete variable of ReverseArray, and its initialisation is unchanged.
+   Same shape as FillArray_r and Quicksort_r, the levels with an inherited concrete variable BART
+   has refined: an INVARIANT clause restating the type of array, and an ANY, taken by a structure
+   rule, in place of a becomes-such-that on the variable itself. */
+REFINEMENT
+    ReverseArray_r
+
+REFINES
+    ReverseArray
+
+SEES
+    Ctx_ReverseArray
+
+INVARIANT
+    array : (0..max_IDX) --> INT
+
+INITIALISATION
+    array := %ii.(ii : 0..max_IDX | ii)
+
+OPERATIONS
+
+    reverse =
+    ANY rr WHERE
+        rr : (0..max_IDX) --> INT &
+        !ii.(ii : 0..max_IDX => rr(ii) = array(max_IDX - ii))
+    THEN
+        array := rr
+    END
+
+END

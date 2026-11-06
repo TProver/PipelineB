@@ -1,0 +1,93 @@
+/* Luhn_sum: first intermediate level of Luhn, written by hand (PipelineB, refinement step).
+   Purpose: data refinement that removes every SIGMA from the operations. The number num is
+   kept, and two running sums are added, updated in constant time when a digit is appended:
+   - sum_now  = Luhn sum of num, as in the specification (weight (size(num) - ii) mod 2);
+   - sum_next = Luhn sum num would have under one more digit appended to its right, that is
+                with every parity flipped (weight (size(num) + 1 - ii) mod 2).
+   Appending dd at index size(num) + 1:
+   - the new sum_now is dd (the new last digit is not doubled) plus the old sum_next, since
+     every old digit has moved one position to the left;
+   - the new sum_next is the doubled value of dd, dd + (dd - 9 * (dd / 5)), plus the old
+     sum_now.
+   The bounds sum <= 9 * size(num) follow from these updates without SIGMA (no digit value
+   exceeds 9) and keep the implementation free of overflow.
+   verify and control_digit keep their existential form, now on the sums: the choice of
+   control_digit stays non-deterministic here; Luhn_det makes it precise. */
+REFINEMENT
+    Luhn_sum
+
+REFINES
+    Luhn
+
+SEES
+    Ctx_Luhn
+
+VARIABLES
+    num, sum_now, sum_next
+
+INVARIANT
+    sum_now : NAT &
+    sum_next : NAT &
+    sum_now <= 9 * size(num) &
+    sum_next <= 9 * size(num) &
+    sum_now = SIGMA(ii).(ii : 1..size(num) |
+        num(ii) + ((size(num) - ii) mod 2) * (num(ii) - 9 * (num(ii) / 5))) &
+    sum_next = SIGMA(ii).(ii : 1..size(num) |
+        num(ii) + ((size(num) + 1 - ii) mod 2) * (num(ii) - 9 * (num(ii) / 5)))
+
+INITIALISATION
+    num := [] ||
+    sum_now := 0 ||
+    sum_next := 0
+
+OPERATIONS
+
+    clear_number =
+    BEGIN
+        num := [] ||
+        sum_now := 0 ||
+        sum_next := 0
+    END;
+
+    add_digit(dd) =
+    PRE
+        dd : DIGIT &
+        size(num) <= max_IDX
+    THEN
+        num := num <- dd ||
+        sum_now := dd + sum_next ||
+        sum_next := dd + (dd - 9 * (dd / 5)) + sum_now
+    END;
+
+    rr <-- verify =
+    BEGIN
+        rr := bool(size(num) >= 2 & #qq.(qq : NAT & sum_now = 10 * qq))
+    END;
+
+    cc <-- control_digit =
+    PRE
+        size(num) >= 1 &
+        size(num) <= max_IDX
+    THEN
+        ANY ch WHERE
+            ch : DIGIT &
+            #qq.(qq : NAT & ch + sum_next = 10 * qq)
+        THEN
+            cc := ch
+        END
+    END;
+
+    ll <-- number_length =
+    BEGIN
+        ll := size(num)
+    END;
+
+    dd <-- digit_at(pp) =
+    PRE
+        pp : NAT &
+        pp : 1..size(num)
+    THEN
+        dd := num(pp)
+    END
+
+END

@@ -1,0 +1,12 @@
+/* Implementation of the PartitionArray context, written by hand: values of the constants. */
+IMPLEMENTATION
+    Ctx_PartitionArray_i
+
+REFINES
+    Ctx_PartitionArray
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

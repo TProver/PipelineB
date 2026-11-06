@@ -1,0 +1,12 @@
+/* Implementation of the context of InsertionSort, written by hand. */
+IMPLEMENTATION
+    Ctx_InsertionSort_i
+
+REFINES
+    Ctx_InsertionSort
+
+VALUES
+    max_IDX = 7;
+    IDX = 0..max_IDX
+
+END

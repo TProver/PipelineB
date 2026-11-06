@@ -1,0 +1,12 @@
+/* Implementation of the head, written by hand. */
+IMPLEMENTATION
+    Systeme_Power_i
+
+REFINES
+    Systeme_Power
+
+IMPORTS
+    Ctx_Power,
+    Power
+
+END

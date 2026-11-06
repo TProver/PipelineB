@@ -1,0 +1,14 @@
+/* Head implementation of the Luhn demonstration, written by hand: imports the context,
+   the Luhn component and the input basic machine used by the C program. */
+IMPLEMENTATION
+    Systeme_Luhn_i
+
+REFINES
+    Systeme_Luhn
+
+IMPORTS
+    Ctx_Luhn,
+    Luhn,
+    Digit_input
+
+END

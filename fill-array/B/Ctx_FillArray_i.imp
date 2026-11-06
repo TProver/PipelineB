@@ -1,0 +1,12 @@
+/* Implementation of the context of FillArray, written by hand. */
+IMPLEMENTATION
+    Ctx_FillArray_i
+
+REFINES
+    Ctx_FillArray
+
+VALUES
+    max_IDX = 10;
+    IDX = 0..max_IDX
+
+END

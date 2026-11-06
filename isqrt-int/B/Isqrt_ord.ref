@@ -1,0 +1,27 @@
+/* Isqrt_ord: first intermediate level of Isqrt, written by hand (PipelineB, refinement step).
+   Purpose: replace max({rr | ...}) by the two facts that define a greatest element: the result
+   belongs to the set, and every element of the set is at most the result. The proof that these facts
+   define the max is thus done once, here, and speaks of order only: no fact on products is needed,
+   the term rr * rr stays opaque. Same purpose as Gcd_r of the gcd-int demonstration.
+   No variable: nothing is inherited. */
+REFINEMENT
+    Isqrt_ord
+
+REFINES
+    Isqrt
+
+SEES
+    Ctx_Isqrt
+
+OPERATIONS
+
+    res <-- isqrt(nn) =
+    PRE
+        nn : VAL
+    THEN
+        res :( res : 0..max_ROOT &
+               res * res <= nn &
+               !rr.(rr : 0..max_ROOT & rr * rr <= nn => rr <= res) )
+    END
+
+END

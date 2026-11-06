@@ -1,0 +1,13 @@
+/* Implementation of the Isqrt context, written by hand: values of the constants. */
+IMPLEMENTATION
+    Ctx_Isqrt_i
+
+REFINES
+    Ctx_Isqrt
+
+VALUES
+    max_VAL = 10000;
+    VAL = 0..max_VAL;
+    max_ROOT = 100
+
+END

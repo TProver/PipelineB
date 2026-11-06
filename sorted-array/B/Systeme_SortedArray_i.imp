@@ -1,0 +1,12 @@
+/* Implementation of the head of SortedArray, written by hand. */
+IMPLEMENTATION
+    Systeme_SortedArray_i
+
+REFINES
+    Systeme_SortedArray
+
+IMPORTS
+    Ctx_SortedArray,
+    SortedArray
+
+END
