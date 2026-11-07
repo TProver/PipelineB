@@ -1,6 +1,5 @@
 /* Head implementation of the max-array demonstration, written by hand: imports the context
-   and the max_array component. iter_services is not imported here: the implementation of
-   max_array has to import it to call its operations, and a machine is imported only once. */
+   and the max_array component. */
 IMPLEMENTATION
     Systeme_max_array_i
 
